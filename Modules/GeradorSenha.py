@@ -6,30 +6,40 @@ numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 simbolos = ['!', '@', '#', '$', '%', '&', '*', '(', ')', '-', '+', ',','.', ';', '/', '?', 'ç', 'Ç']
 senha = []
 
-total_minuscula_incluido = 0
-total_maiuscula_incluido = 0
-total_numero_incluido = 0
-total_simbolo_incluido = 0
-
-# print("Welcome to the PyPassword Generator!")
-# nr_letters= int(input("How many letters would you like in your password?\n"))
-# nr_symbols = int(input(f"How many symbols would you like?\n"))
-# nr_numbers = int(input(f"How many numbers would you like?\n"))
-
-#Eazy Level - Order not randomised:
-#e.g. 4 letter, 2 symbol, 2 number = JduE&!91
-
-
-#Hard Level - Order of characters randomised:
-#e.g. 4 letter, 2 symbol, 2 number = g^2jk8&P
-
+# total_minuscula_incluido = 0
+# total_maiuscula_incluido = 0
+# total_numero_incluido = 0
+# total_simbolo_incluido = 0
 
 def run():
+
+    maiuscula_obrigatoria = input("Maiuscula obrigatoria? (S/N): ")
+    simbolo_obrigatoria = input("Simbolo obrigatorio? (S/N): ")
+    numero_obrigatoria = input("Numero obrigatorio? (S/N): ")
+
     tamanho = int(input("Qual o tamanho da senha: "))
 
     if tamanho <= 10:
         print("!!! ATENÇAO - senha muito pequena, valor alterado para 10 pelo sistema - ATENÇAO")
         tamanho = 10
+
+    senha.clear()
+
+    if maiuscula_obrigatoria == "S" or maiuscula_obrigatoria == "s":
+        aleatorio = random.choice(maiusculas)
+        senha.append(aleatorio)
+        tamanho -= 1
+    if simbolo_obrigatoria == "S" or simbolo_obrigatoria == "s":
+        aleatorio = random.choice(simbolos)
+        senha.append(aleatorio)
+        tamanho -= 1
+    if numero_obrigatoria == "S" or numero_obrigatoria == "s":
+        aleatorio = random.choice(numeros)
+        senha.append(aleatorio)
+        tamanho -= 1
+
+    aleatorio = random.choice(minusculas)
+    senha.append(aleatorio)
 
     for posicao in range (1, tamanho + 1):
 
@@ -43,39 +53,9 @@ def run():
             aleatorio = random.choice(numeros)
         else:
             aleatorio = random.choice(simbolos)
+
         senha.append(aleatorio)
-        ''.join(senha)
+
+    random.shuffle(senha)
     print(*senha, sep='')
-
-    # para melhorar no futuro:
-    # se nao tiver ao menos 1 de cada tipo, gerar a senha novamente
-
-    # minuscula_obrigatoria =
-    # maiuscula_obrigatoria =
-    # simbolo_obrigatoria =
-    # numero_obrigatoria =
-    #
-    # senha.clear()
-    #
-    # for posicao in range (1, tamanho + 1):
-    #
-    #     tipo = random.randint(1,5)
-    #
-    #     if tipo == 1:
-    #         aleatorio = random.choice(minusculas)
-    #         total_minuscula_incluido += 1
-    #     elif tipo == 2:
-    #         aleatorio = random.choice(maiusculas)
-    #         total_maiuscula_incluido += 1
-    #     elif tipo == 3:
-    #         aleatorio = random.choice(numeros)
-    #         total_numero_incluido += 1
-    #     else:
-    #         aleatorio = random.choice(simbolos)
-    #         total_simbolo_incluido += 1
-    #
-    #     senha.append(aleatorio)
-    #     ''.join(senha)
-    #
-    # print(*senha, sep='')
 
